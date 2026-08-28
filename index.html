@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>网球社 · 说明文档</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #f5f7fb;
+            color: #000000;
+            padding: 2rem 1.5rem;
+            line-height: 1.5;
+        }
+        .container {
+            max-width: 920px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 32px;
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.04), 0 4px 12px rgba(0, 20, 30, 0.03);
+            padding: 2.5rem 2.8rem;
+            transition: all 0.2s;
+        }
+        @media (max-width: 600px) {
+            body { padding: 1rem 0.8rem; }
+            .container { padding: 1.8rem 1.2rem; border-radius: 24px; }
+        }
+
+        .header {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            margin-bottom: 2rem;
+            border-bottom: 2px solid #eef2f6;
+            padding-bottom: 1.25rem;
+        }
+        .header h1 {
+            font-size: 1.9rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            color: #000000;
+            background: none;
+            -webkit-text-fill-color: #000000;
+        }
+        .header .tennis-emoji {
+            font-size: 2rem;
+            margin-right: 0.2rem;
+        }
+        .badge {
+            margin-left: auto;
+            color: #000000;
+            padding: 0.25rem 1rem;
+            border-radius: 40px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 0.3px;
+            background: #e6edf4;
+        }
+
+        .card {
+            background: #f9fafc;
+            border-radius: 20px;
+            padding: 1.5rem 1.8rem;
+            margin-bottom: 2rem;
+            border: 1px solid #eef2f6;
+            transition: 0.1s ease;
+        }
+        .card-title {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #000000;
+            margin-bottom: 1.2rem;
+            letter-spacing: -0.01em;
+        }
+        .card-title span {
+            background: #d0dfec;
+            border-radius: 30px;
+            padding: 0 0.6rem;
+            font-size: 0.9rem;
+            color: #000000;
+        }
+
+        .info-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.9rem;
+        }
+        .info-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+        }
+        .info-item .label {
+            font-weight: 600;
+            color: #000000;
+            min-width: 70px;
+            flex-shrink: 0;
+        }
+        .info-item .value {
+            color: #000000;
+        }
+        .info-item .value strong {
+            color: #000000;
+        }
+        .highlight-box {
+            background: #e9f0f8;
+            padding: 1rem 1.4rem;
+            border-radius: 14px;
+            margin: 0.8rem 0 0.2rem;
+            font-size: 0.98rem;
+            border-left: 3px solid #2e6a92;
+            color: #000000;
+        }
+        .highlight-box strong {
+            color: #000000;
+        }
+
+        .fee-detail {
+            background: white;
+            border-radius: 16px;
+            padding: 1.2rem 1.5rem;
+            margin: 0.6rem 0 0.2rem;
+            border: 1px solid #e3eaf0;
+        }
+        .fee-detail p {
+            margin-bottom: 0.4rem;
+            color: #000000;
+        }
+        .fee-detail p strong {
+            color: #000000;
+        }
+
+        /* 二维码区域 */
+        .qr-wrapper {
+            margin-top: 1rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.8rem;
+            background: #f2f7fc;
+            padding: 1.8rem 2rem 2rem;
+            border-radius: 20px;
+            border: 1px dashed #b6cee0;
+        }
+        .qr-wrapper .qr-label {
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: #000000;
+            letter-spacing: 0.3px;
+        }
+        .qr-wrapper img {
+            max-width: 340px;
+            width: 100%;
+            height: auto;
+            border-radius: 16px;
+            background: white;
+            padding: 14px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+            border: 1px solid #dae3ec;
+        }
+        .qr-wrapper .qr-hint {
+            font-size: 0.9rem;
+            color: #d32f2f;
+            background: white;
+            padding: 0.3rem 1.6rem;
+            border-radius: 30px;
+            border: 1px solid #d7e2ec;
+            font-weight: 600;
+        }
+
+        /* 交通地图区域 - 支持点击放大 */
+        .map-wrapper {
+            margin-top: 0.6rem;
+            position: relative;
+            cursor: pointer;
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid #dae3ec;
+            background: #e6edf4;
+            transition: box-shadow 0.2s;
+        }
+        .map-wrapper:hover {
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        }
+        .map-wrapper img {
+            display: block;
+            width: 100%;
+            height: auto;
+            border-radius: 16px;
+        }
+        .map-wrapper .tap-hint {
+            position: absolute;
+            bottom: 16px;
+            right: 16px;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(4px);
+            color: white;
+            font-size: 0.75rem;
+            padding: 0.3rem 1rem;
+            border-radius: 30px;
+            letter-spacing: 0.3px;
+            pointer-events: none;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+        .map-wrapper .tap-hint span {
+            font-size: 1rem;
+        }
+
+        /* 图片放大弹窗 (Lightbox) */
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(8px);
+            z-index: 9999;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            padding: 2rem;
+            animation: fadeIn 0.25s ease;
+        }
+        .lightbox.active {
+            display: flex;
+        }
+        .lightbox img {
+            max-width: 90vw;
+            max-height: 85vh;
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            object-fit: contain;
+            animation: zoomIn 0.3s ease;
+        }
+        .lightbox .close-hint {
+            position: fixed;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.85rem;
+            background: rgba(0, 0, 0, 0.4);
+            padding: 0.4rem 1.6rem;
+            border-radius: 40px;
+            backdrop-filter: blur(4px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            pointer-events: none;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes zoomIn {
+            from { transform: scale(0.92); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        .schedule-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem 2.2rem;
+            margin-top: 0.3rem;
+        }
+        .schedule-day {
+            display: flex;
+            align-items: baseline;
+            gap: 0.4rem;
+        }
+        .schedule-day .day {
+            font-weight: 600;
+            color: #000000;
+            min-width: 48px;
+        }
+        .schedule-day .priority {
+            font-size: 0.7rem;
+            background: #dae6f2;
+            padding: 0.1rem 0.6rem;
+            border-radius: 30px;
+            color: #000000;
+            font-weight: 600;
+            margin-left: 0.2rem;
+        }
+
+        .court-rule {
+            background: #f0f5fa;
+            border-radius: 16px;
+            padding: 0.8rem 1.3rem;
+            margin: 0.6rem 0 0.2rem;
+            font-size: 0.98rem;
+            color: #000000;
+        }
+        .court-rule strong {
+            color: #000000;
+        }
+
+        .signup-detail {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 0.8rem 1.8rem;
+            background: #f0f5fa;
+            padding: 0.8rem 1.3rem;
+            border-radius: 30px;
+            margin: 0.6rem 0 0.2rem;
+            color: #000000;
+        }
+        .signup-detail .example {
+            background: white;
+            padding: 0.2rem 1rem;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            border: 1px dashed #547f9e;
+            color: #000000;
+        }
+
+        hr {
+            border: none;
+            border-top: 1px solid #e2eaf0;
+            margin: 1.8rem 0 1rem;
+        }
+
+        .footer-note {
+            font-size: 0.9rem;
+            color: #000000;
+            text-align: right;
+            margin-top: 0.6rem;
+            border-top: 1px solid #edf2f7;
+            padding-top: 1.2rem;
+        }
+        /* 底部汇总信息 */
+        .footer-summary {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 0.8rem;
+            font-size: 0.95rem;
+            color: #000000;
+        }
+        .footer-summary span {
+            font-weight: 600;
+            color: #000000;
+        }
+        .footer-summary div {
+            color: #000000;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <!-- 头部 -->
+    <div class="header">
+        <span class="tennis-emoji">🎾</span>
+        <h1>网球社 · 活动说明</h1>
+        <span class="badge">2026</span>
+    </div>
+
+    <!-- 会费 -->
+    <div class="card">
+        <div class="card-title">
+            <span>💰</span> 会费制度
+            <span>6次</span>
+        </div>
+        <div class="info-list">
+            <div class="info-item">
+                <span class="label">缴纳标准</span>
+                <span class="value">一次性缴纳 <strong>¥120</strong> ，获得 <strong>6次</strong> 活动参与额度</span>
+            </div>
+            <div class="info-item">
+                <span class="label">扣减方式</span>
+                <span class="value">每次参加活动扣减 1 次额度（对应 ¥20）</span>
+            </div>
+            <div class="info-item">
+                <span class="label">续费说明</span>
+                <span class="value">额度用尽后，需再次一次性缴纳 ¥120 续购 6 次额度，方可继续报名</span>
+            </div>
+            <div class="fee-detail">
+                <p><strong>📌 会费缴纳请联系：</strong> Yao.Ma</p>
+                <div class="qr-wrapper">
+                    <img 
+                        src="IMG_6156.PNG.jpeg" 
+                        alt="缴费二维码"
+                    />
+                    <span class="qr-hint">扫码支付 · 备注姓名</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 每周固定打球时间 -->
+    <div class="card">
+        <div class="card-title">
+            <span>📅</span> 每周固定打球时间
+        </div>
+        <div class="schedule-grid">
+            <div class="schedule-day"><span class="day">首选</span> 周三 <span class="priority">优先</span></div>
+            <div class="schedule-day"><span class="day">次选</span> 周五</div>
+            <div class="schedule-day"><span class="day">备选</span> 周一</div>
+        </div>
+        <div class="highlight-box" style="margin-top: 0.8rem;">
+            <strong>⏳ 场地预约说明：</strong> 网球场地并非包年制，采用单次预约。若首选时间约不上，将按 <strong>周三 → 周五 → 周一</strong> 顺序顺延。
+        </div>
+    </div>
+
+    <!-- 场地时间段分配 -->
+    <div class="card">
+        <div class="card-title">
+            <span>⏱️</span> 场地时间段分配
+        </div>
+        <div class="info-list">
+            <div class="info-item">
+                <span class="label">首选方案</span>
+                <span class="value"><strong>18:00–19:00</strong> (场地 ×1) ＋ <strong>19:00–20:00</strong> (场地 ×2)</span>
+            </div>
+            <div class="info-item">
+                <span class="label">次选方案</span>
+                <span class="value">当参加人数为 <strong>4人</strong> 时，请收集其他3人意见，可联系副社长重新约场地时间</span>
+            </div>
+            <div class="court-rule">
+                <strong>📐 场地数量规则：</strong><br />
+                • 参加人数刚好为 <strong>4人</strong> → 预定 <strong>1片</strong> 场地，共 <strong>2小时</strong><br />
+                • 参加人数 <strong>大于4人</strong> → 预定 <strong>2片</strong> 场地，共 <strong>3小时</strong>
+            </div>
+        </div>
+    </div>
+
+    <!-- 接龙 -->
+    <div class="card">
+        <div class="card-title">
+            <span>📋</span> 接龙 &amp; 预约提醒
+        </div>
+        <div class="info-list">
+            <div class="info-item">
+                <span class="label">接龙开启</span>
+                <span class="value">活动接龙会 <strong>提前一周</strong> 开始</span>
+            </div>
+            <div class="info-item">
+                <span class="label">场地预约</span>
+                <span class="value">场地开放预约时间为活动开始前 <strong>6天</strong>，届时会在群里提醒大家</span>
+            </div>
+            <div class="signup-detail">
+                <span>📌 示例：</span>
+                <span class="example">8月12日 活动，场地预约开放时间为 8月6日</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- 场地交通 · 插入 map.png 支持点击放大 -->
+    <div class="card" style="margin-bottom: 0.8rem;">
+        <div class="card-title">
+            <span>📍</span> 场地交通
+        </div>
+        <div style="font-weight: 500; color: #000000; margin-bottom: 0.6rem;">场地位置 · 交通指引</div>
+        <!-- 地图容器，点击触发放大 -->
+        <div class="map-wrapper" onclick="openLightbox()">
+            <img 
+                src="map.png" 
+                alt="场地交通地图"
+                loading="lazy"
+            />
+            <div class="tap-hint">
+                <span>🔍</span> 点击放大
+            </div>
+        </div>
+        <div style="font-size: 0.85rem; color: #000000; margin-top: 0.6rem; background: #f0f6fc; padding: 0.2rem 1.2rem; border-radius: 40px; display: inline-block;">
+            🅿️ 场地入口 · 停车指引见群内
+        </div>
+    </div>
+
+    <!-- 底部 · 汇总信息 -->
+    <hr />
+    <div class="footer-summary">
+        <div><span>📌 会费缴纳：</span>Yao.Ma</div>
+        <div><span>⏰ 固定时间：</span>周三 (首选) · 周五 (次选) · 周一 (备选)</div>
+        <div><span>🏸 场地规则：</span>4人一片2h · &gt;4人两片3h</div>
+    </div>
+    <div class="footer-note">
+        网球社 · 说明文档 v1.0 · 如有调整以群内最新通知为准
+    </div>
+</div>
+
+<!-- 图片放大 Lightbox -->
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+    <img src="map.png" alt="场地交通地图 (放大)" id="lightboxImg" />
+    <div class="close-hint">点击任意处关闭</div>
+</div>
+
+<script>
+    function openLightbox() {
+        document.getElementById('lightbox').classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+    function closeLightbox() {
+        document.getElementById('lightbox').classList.remove('active');
+        document.body.style.overflow = '';
+    }
+    // ESC 键关闭
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+            closeLightbox();
+        }
+    });
+</script>
+</body>
+</html>
